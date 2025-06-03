@@ -1,28 +1,28 @@
-resource "aws_security_group" "webserver_sg" {
+resource "aws_security_group" "main" {
   name        = "web-server-sg"
   description = "Allow SSH and Web (HTTP & HTTPS) inbound traffic"
-  vpc_id      = aws_vpc.vpc1.id # Replace with your VPC ID
+  vpc_id      = aws_vpc.main.id # Replace with your VPC ID
 
   ingress {
     description = "Allow SSH"
-    from_port   = 22
-    to_port     = 22
+    from_port   = var.ssh_port
+    to_port     = var.ssh_port
     protocol    = "tcp"
     cidr_blocks = ["102.244.45.223/32"] # Replace with a more restrictive CIDR block for better security
   }
 
   ingress {
     description = "Allow HTTP"
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.http_port
+    to_port     = var.http_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Replace with a more restrictive CIDR block for better security
   }
 
   ingress {
     description = "Allow HTTPS"
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = var.https_port
+    to_port     = var.https_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Replace with a more restrictive CIDR block for better security
   }
@@ -36,8 +36,8 @@ resource "aws_security_group" "webserver_sg" {
   }
 
   tags = {
-    Name = "webserver-security-group"
+    Name = "webserver-sg"
   }
 
-  depends_on = [aws_vpc.vpc1]
+  depends_on = [aws_vpc.main]
 }
