@@ -2,10 +2,10 @@
 
 # Description: Run this command on startup
 
-sudo yum update -y
+sudo ${package_manager} update -y
 sudo groupadd docker
 sudo useradd John -aG docker 
-sudo yum install git unzip wget httpd -y
+sudo ${package_manager} install git unzip wget httpd -y
 sudo systemctl start httpd
 sudo systemctl enable httpd
 sudo cd /opt

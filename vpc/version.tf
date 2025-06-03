@@ -7,13 +7,13 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "ja-w7-terraform-state-bucket"
-    key          = "qa/terraform.tfstate"
-    region       = "us-east-1"
+    bucket       = var.bucket
+    key          = "dev/w7-vpc/terraform.tfstate"
+    region       = var.region
     use_lockfile = true
   }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }

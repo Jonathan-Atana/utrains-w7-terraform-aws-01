@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket       = "terraform-state-bucket-ja"
-    key          = "dev/utrains-w7-terraform/terraform.tfstate"
-    region       = "us-east-1"
+    bucket       = var.bucket
+    key          = "dev/w7-ec2/terraform.tfstate"
+    region       = var.region
     use_lockfile = true
   }
 }
